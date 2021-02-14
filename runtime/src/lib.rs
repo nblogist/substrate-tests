@@ -244,6 +244,23 @@ impl pallet_balances::Trait for Runtime {
 	type WeightInfo = ();
 }
 
+// !Adding Nick's Pallet
+parameter_types! {
+	pub const NickReservationFee : u128 = 100;
+	pub const MinNickLength: usize = 8;
+	pub const MaxNickLength: usize = 32;
+}
+
+impl pallet_nicks::Trait for Runtime{
+	type Currency = pallet_balances::Module<Runtime>;
+	type ReservationFee = NickReservationFee;
+	type Slashed = ();
+	type ForceOrigin = frame_system::EnsureRoot<AccountId>;
+	type MinLength = MinNickLength;
+	type MaxLength = MaxNickLength;
+	type Event = Event;
+}
+
 parameter_types! {
 	pub const TransactionByteFee: Balance = 1;
 }
@@ -283,6 +300,7 @@ construct_runtime!(
 		Sudo: pallet_sudo::{Module, Call, Config<T>, Storage, Event<T>},
 		// Include the custom logic from the template pallet in the runtime.
 		TemplateModule: pallet_template::{Module, Call, Storage, Event<T>},
+		Nicks: pallet_nicks::{Module, Call, Storage, Event<T>}
 	}
 );
 

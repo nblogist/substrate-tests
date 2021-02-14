@@ -28,6 +28,7 @@ serde = { features = ['derive'], optional = true, version = '1.0.119' }
 pallet-template = { path = '../pallets/template', default-features = false, version = '2.0.1' }
 
 # Substrate dependencies
+pallet-nicks = { default-features = false, version = '2.0.0' }
 frame-benchmarking = { default-features = false, optional = true, version = '2.0.1' }
 frame-executive = { default-features = false, version = '2.0.1' }
 frame-support = { default-features = false, version = '2.0.1' }
@@ -67,6 +68,7 @@ runtime-benchmarks = [
     'sp-runtime/runtime-benchmarks',
 ]
 std = [
+    'pallet-nicks/std',
     'codec/std',
     'serde',
     'frame-executive/std',
